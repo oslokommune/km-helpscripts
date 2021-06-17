@@ -2,13 +2,13 @@
 
 1. Create bench namespace
 
-kubectl create namespace bench
+`kubectl create namespace bench`
 
 2. Run the job
 
-kubectl apply -f job-eks.yaml -n bench
+`kubectl apply -f job-eks.yaml -n bench`
 
 
-3. Check logs for complete run
+3. Check logs after complete run
 
-k -n bench logs <pod-id>
+`kubectl -n bench logs <pod-id>`
