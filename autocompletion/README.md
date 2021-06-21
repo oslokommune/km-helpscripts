@@ -11,7 +11,7 @@ The debian installation (`apt`) is a bit outdated, so here is another way of ins
 
 In `.bashrc`, add
 
-```
+```bash
 . <(kubectl completion bash)
 ```
 
@@ -19,7 +19,7 @@ In `.bashrc`, add
 
 In `.bashrc`, add
 
-```
+```bash
 . <(okctl completion bash)
 ```
 
@@ -27,7 +27,8 @@ or see `okctl completion -h` for other shells.
 
 # Aliases
 
+```bash
 alias k=kubectl
 # Alias k bash completion. See how you can find this command with: complete | grep kubectl
 complete -o default -F __start_kubectl k 
-
+```
