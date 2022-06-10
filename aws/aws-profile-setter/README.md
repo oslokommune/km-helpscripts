@@ -23,26 +23,20 @@ okctl-dev-AWSAdministratorAccess-123456789012
 
 # Installation
 
-## Bash or Zsh
-
 `cd` to a directory you have in your PATH. Then run:
 
 ```sh
 wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-profile-setter/aw
+chmod +x aw
 ```
-
 
 ## Fish
 
-`cd` to a directory you have in your PATH. Then run:
+Follow steps above. Then run:
 
 ```sh
-wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-profile-setter/aw
 wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-profile-setter/fs.fish -O ~/.config/fish/functions/fs.fish
 ```
-
-
-
 
 # Usage
 
@@ -54,12 +48,9 @@ wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-p
 
 ## Fish
 
-
-
 ```shell
 fs aw
 ```
-
 
 # Usage with AWS SSO
 
