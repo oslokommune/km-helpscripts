@@ -1,4 +1,4 @@
-`aw` is a small script that helps you set AWS_PROFILE.
+`aw` is a small script that helps you set `AWS_PROFILE`.
 
 Example:
 
