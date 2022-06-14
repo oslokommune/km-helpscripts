@@ -23,6 +23,20 @@ okctl-dev-AWSAdministratorAccess-123456789012
 
 # Installation
 
+## Requirements
+
+Install fzf.
+
+For bash:
+
+https://github.com/junegunn/fzf
+
+For Fish:
+
+https://github.com/PatrickF1/fzf.fish
+
+## Steps
+
 `cd` to a directory you have in your PATH. Then run:
 
 ```sh
