@@ -6,7 +6,7 @@ Implementation: Terraform
 
 :warning::warning::warning:
 
-**BIG WARNING**
+**BIG COST WARNING**
 
 Mac dedicated hosts are **very** expensive. Make 100% sure to shut them down right after you finish testing.
 
@@ -47,23 +47,38 @@ tf apply
 ```
 cd ..
 ok scaffold infra
+cd infra
+
+# Get VPC Terraform IaC
+curl -s -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3.raw" \
+    https://raw.githubusercontent.com/oslokommune/golden-path-iac/WIP/terraform/templates/vpc.tf -o vpc.tf
+
+tf init
+tf plan
+# tf plan should give you errors, indicating which fields in vpc.tf (and other places perhaps) you need to configure.
+# After configuring, run
+tf apply
 ```
-
-
 
 ## Create the Mac instance
 
-```sh
-cat <<EOF >mac-ec2.tf
-module "dedicated-host" {
-  source            = "DanielRDias/dedicated-host/aws"
-  version           = "0.2.1"
-  instance_type     = "mac1.metal"
-  availability_zone = "eu-west-1"
+I haven't found a working Terraform provider for this. See issue https://github.com/DanielRDias/terraform-aws-dedicated-host/issues/7.
 
-  tags = local.common_tags
-}
-EOF
+Also couldn't get https://registry.terraform.io/providers/hashicorp%20%20/aws/latest/docs/resources/ec2_host#instance_family to work (I gave up after 11 minutes of tf apply not getting any progress, maybe I should have waited longer?)
 
-```
+So for now, create it in the AWS console GUI. ToDo: Describe this better.
+
+* Select the VPC from the previous step
+* Choose a public subnet?
+* Should we put on a IAM role so we cannot do lots of harm?
+* Create a new keypair
+* Note which security group is created
+
+
+
+## Important: Clean up
+
+* Delete the EC2 -> dedicated host
+* Delete the keypair
+* Check if the security group created in the previous step needs to be deleted
 
