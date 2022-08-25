@@ -80,6 +80,9 @@ To login (needs to be done every ~8 hours or so):
 ```
 . aw
 aws sso login
+
+# or just
+. aw -l
 ```
 
 (or `fs aw` for Fish)
@@ -87,4 +90,7 @@ aws sso login
 ```sh
 fs aw
 aws sso login
+
+# or just
+fs aw -l
 ```
