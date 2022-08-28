@@ -16,6 +16,8 @@ $ . aw
 
 ![fzf](fzf.png)
 
+then `AWS_PROFILE` is set:
+
 ```shell
 $ echo $AWS_PROFILE
 okctl-dev-AWSAdministratorAccess-123456789012
@@ -25,45 +27,58 @@ okctl-dev-AWSAdministratorAccess-123456789012
 
 ## Requirements
 
-Install fzf.
+### Install fzf
 
-For bash:
+* For Bash / macOS: https://github.com/junegunn/fzf
 
-https://github.com/junegunn/fzf
+* For Fish: https://github.com/PatrickF1/fzf.fish
 
-For Fish:
+## Bash or Zsh
 
-https://github.com/PatrickF1/fzf.fish
-
-## Steps
-
-`cd` to a directory you have in your PATH. Then run:
+* Run
 
 ```sh
+cd /usr/local/bin # Or some other directory in your PATH
 wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-profile-setter/aw
 chmod +x aw
 ```
 
 ## Fish
 
-Follow steps above. Then run:
+* Run
 
 ```sh
-wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-profile-setter/fs.fish -O ~/.config/fish/functions/fs.fish
+cd /usr/local/bin # Or some other directory in your PATH
+wget https://raw.githubusercontent.com/oslokommune/km-helpscripts/main/aws/aws-profile-setter/aw
+chmod +x aw
 ```
 
-# Usage
+* Run
+
+```
+fisher install edc/bass
+alias fs="bass source"
+funcsave fs
+```
+
+(We need this to be able to source bash commands, see below).
+
+# Usage examples
 
 ## Bash or Zsh
 
 ```shell
 . aw
+
+echo $AWS_PROFILE
 ```
 
 ## Fish
 
 ```shell
 fs aw
+
+echo $AWS_PROFILE
 ```
 
 # Usage with AWS SSO
@@ -77,7 +92,10 @@ aws sso configure
 
 To login (needs to be done every ~8 hours or so):
 
-```
+
+## Bash/Zsh
+
+```shell
 . aw
 aws sso login
 
@@ -85,9 +103,9 @@ aws sso login
 . aw -l
 ```
 
-(or `fs aw` for Fish)
+## Fish
 
-```sh
+```fish
 fs aw
 aws sso login
 
