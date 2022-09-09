@@ -1,4 +1,4 @@
-`aw` is a small script that helps you set `AWS_PROFILE`.
+`aw` is a script that sets `AWS_PROFILE` based on the contents in `~/.aws/config`, and possibly logs in with AWS SSO using the selected profile.
 
 Example:
 
@@ -22,6 +22,8 @@ then `AWS_PROFILE` is set:
 $ echo $AWS_PROFILE
 okctl-dev-AWSAdministratorAccess-123456789012
 ````
+
+:bulb: If you add the `-l` flag (`. aw -l`), you will be logged in with AWS SSO as well (same as running `aws sso login`).
 
 # Installation
 
