@@ -114,3 +114,28 @@ aws sso login
 # or just
 fs aw -l
 ```
+
+# Add AWS_PROFILE to prompt
+
+## Fish
+
+![fish-prompt](fish-prompt.png)
+
+To add the AWS_PROFILE (if set) to the prompt, add
+
+```fish
+    if set -q AWS_PROFILE
+        set_color $fish_color_norma
+        printf "("
+
+        set_color fb6620
+        printf "$AWS_PROFILE"
+
+        set_color $fish_color_normal
+        printf ")"
+    end
+```
+
+to the end of your `~/.config/fish/functions/fish_prompt.fish`.
+
+See example in [fish_prompt.fish](fish_prompt.fish).
