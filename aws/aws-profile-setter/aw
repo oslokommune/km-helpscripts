@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 
-# https://stackoverflow.com/a/2990533
+# Thanks to https://stackoverflow.com/a/2990533
 echoerr() {
     printf "%s\n" "$*" >&2;
 }
 
-ME=$(basename ${BASH_SOURCE[0]})
+# Thanks to https://stackoverflow.com/a/54755784/915441
+ME=${BASH_SOURCE[0]:-${(%):-%x}}
+ME=$(basename "$ME")
 
+if [[ $* == "-h" || $* == "--help" ]]; then
+  echo USAGE:
+  echo "$ME [-l] [-h|--help]"
+  echo
+  echo    "-h, --help     Show this help message"
+  echo -e "-l, --help     Runs \033[1;32maws sso login\033[0m with the selected AWS_PROFILE"
+  exit 0
+fi
+
+# Validate requirements
 if ! command -v fzf &> /dev/null
 then
     echo 'fzf' could not be found. Install before retrying.
@@ -17,20 +29,24 @@ fi
 #PROFILE=$(aws configure list-profiles | fzf)
 PROFILE=$(grep -oP "^\[profile ([a-zA-Z0-9\-]+)" ~/.aws/config | sed "s/\[profile //g" | fzf)
 
-if [[ ! -z ${BASH_VERSION} ]]; then
-    # User is using Bash
+# Set profile, or print how to do so
+if [[ -n ${BASH_VERSION} || -n ${ZSH_VERSION} ]]; then
+    # User is using Bash or Zsh (or Fish edc/bass)
     [[ "${BASH_SOURCE[0]}" != "${0}" ]] && IS_SOURCED=true
 
     if [[ $IS_SOURCED = "true" ]]; then
         # Using is running this command with the source prefix '.' or 'source'
         export AWS_PROFILE="$PROFILE"
     else
-        echo "To use AWS environment, run:"
-        echo "aws configure sso (one time), then aws sso login"
-        echo "export AWS_PROFILE=$PROFILE"
+        echo "To use the selected AWS environment, now run:"
         echo
-        echo "Hint: To set this automatically, use"
-        echo ". $ME $@"
+        echo -e "\033[1;32maws configure sso \033[0m# (one time)"
+        echo -e "\033[1;32maws sso login\033[0m"
+        echo -e "\033[1;32mexport AWS_PROFILE=$PROFILE\033[0m"
+        echo
+        echo "Hint: To avoid having to type out this every time, you can run one of the following commands:"
+        echo -e "\033[1;32m. $ME -l\033[0m # Runs aws sso login and the 'export AWS_PROFILE=...' in the current shell"
+        echo -e "\033[1;32m. $ME   \033[0m # Runs the 'export AWS_PROFILE=...' in the current shell"
     fi
 else
     echo "Terminal is not supported, so you will have to set this environment variable manually:"
