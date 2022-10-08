@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+__aw_ps1() {
+    if [[ -n $AWS_PROFILE ]]; then
+        echo -e "\033[0;1m(\033[1;33m$AWS_PROFILE\033[0;1m)\033[0m "
+    fi
+}
+
+aw() {
+    if [[ "$*" == *"-h"* ]]; then
+      echo -e "Set the environment variable AWS_PROFILE based on the output of \033[32maws configure list-profiles\033[0m"
+      echo
+      echo "USAGE:"
+      echo "$ME [-l|--login] [-h|--help]"
+      echo
+      echo    "-h, --help     Show this help message"
+      echo -e "-l, --login    Runs \033[32maws sso login\033[0m with the selected AWS_PROFILE"
+      exit 0
+    fi
+
+    # shellcheck disable=SC2155 # Ignoring this fow now, but we should have better error handling.
+    export AWS_PROFILE=$(aws configure list-profiles | fzf)
+
+    if [[ "$*" == *"-l"* ]]; then
+          aws sso login
+    fi
+}
