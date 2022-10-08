@@ -1,4 +1,4 @@
-`aw` is a script that sets `AWS_PROFILE` based on the contents in `~/.aws/config`, and possibly logs in with AWS SSO using the selected profile.
+`aw` is a shell function that sets `AWS_PROFILE` based on the contents in `~/.aws/config`, and possibly logs in with AWS SSO using the selected profile.
 
 Example:
 
