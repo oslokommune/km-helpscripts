@@ -79,7 +79,7 @@ function clone() {
     exit 30
   fi
 
-  git checkout -b 0-set-repo-templates
+  git checkout -b "$branch"
 }
 
 if [[ -f log.txt ]]; then
