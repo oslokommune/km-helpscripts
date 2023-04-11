@@ -21,7 +21,7 @@ function sso
             echo
             echo    "-h, --help     Show this help message"
             echo -e "-l, --login    Runs \033[32maws sso login\033[0m with the selected AWS_PROFILE"
-        case -v --login
+        case -l --login
             aws sso login
     end
 end
