@@ -86,7 +86,7 @@ if [[ -f log.txt ]]; then
   rm log.txt
 fi
 
-branch="admin_120-set_repo_defaults"
+branch="0-set_repo_defaults"
 curOrg="oslokommune"
 
 # Code repos
@@ -105,6 +105,20 @@ apply_default_issue_english $curOrg $curRepo
 push_and_open $curOrg $curRepo
 
 curRepo="composite-actions"
+clone $curOrg $curRepo $branch
+apply_codeowners
+apply_pr_template
+apply_default_issue_english $curOrg $curRepo
+push_and_open $curOrg $curRepo
+
+curRepo="pirates-iac"
+clone $curOrg $curRepo $branch
+apply_codeowners
+apply_pr_template
+apply_default_issue_english $curOrg $curRepo
+push_and_open $curOrg $curRepo
+
+curRepo="pirates-apps"
 clone $curOrg $curRepo $branch
 apply_codeowners
 apply_pr_template
