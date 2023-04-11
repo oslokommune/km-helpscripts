@@ -4,10 +4,10 @@ Install `zsh` here: https://github.com/PatrickF1/fzf.fish
 
 # Installation steps
 
-* Create the file `~/.config/fish/functions/aw.fish` with the following contents:
+* Create the file `~/.config/fish/functions/sso.fish` with the following contents:
 
 ```fish
-function aw
+function sso
     echo cmd: "$argv"
 
     switch "$argv"
