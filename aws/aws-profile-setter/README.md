@@ -11,7 +11,7 @@ $ echo $AWS_PROFILE
 yields an empty result. If you run:
 
 ```shell
-$ aw
+$ sso
 ```
 
 ![fzf](fzf.png)
@@ -23,7 +23,7 @@ $ echo $AWS_PROFILE
 okctl-dev-AWSAdministratorAccess-123456789012
 ````
 
-:bulb: If you add the `-l` flag (`aw -l`), you will be logged in with AWS SSO as well (same as running `aws sso login`).
+:bulb: If you add the `-l` flag (`sso -l`), you will be logged in with AWS SSO as well (same as running `aws sso login`).
 
 And even better, if you follow the instructions (see installation steps in subdirectories in this
 repository) to add `AWS_PROFILE` to your shell prompt, you will always know which AWS environment you're operating in. Example:

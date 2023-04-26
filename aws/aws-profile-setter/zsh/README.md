@@ -31,5 +31,5 @@ setopt promptsubst
 To verify that it works:
 
 * Open a new terminal
-* Run `aw`
-* Run `aw -l`
+* Run `sso`
+* Run `sso -l`

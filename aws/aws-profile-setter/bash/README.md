@@ -29,5 +29,5 @@ PS1="\[\033[01;36m\]\w\[\033[01;34m\]\$(__git_ps1)\[\033[0m\] \$(__aw_ps1)$ "
 To verify that it works:
 
 * Open a new terminal
-* Run `aw`
-* Run `aw -l`
+* Run `sso`
+* Run `sso -l`

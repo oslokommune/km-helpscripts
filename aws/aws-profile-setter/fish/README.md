@@ -7,12 +7,8 @@ Install `zsh` here: https://github.com/PatrickF1/fzf.fish
 * Create the file `~/.config/fish/functions/sso.fish` with the following contents:
 
 ```fish
-function sso
-    echo cmd: "$argv"
-
+function sso --description "Sets the environment variable AWS_PROFILE"
     switch "$argv"
-        case ""
-            export AWS_PROFILE=$(aws configure list-profiles | fzf)
         case -h --help
             echo -e "Set the environment variable AWS_PROFILE based on the output of \033[32maws configure list-profiles\033[0m"
             echo
@@ -21,6 +17,12 @@ function sso
             echo
             echo    "-h, --help     Show this help message"
             echo -e "-l, --login    Runs \033[32maws sso login\033[0m with the selected AWS_PROFILE"
+            exit 0
+    end
+
+    export AWS_PROFILE=$(aws configure list-profiles | fzf)
+
+    switch "$argv"
         case -l --login
             aws sso login
     end
@@ -51,5 +53,5 @@ See example in [fish_prompt.fish](fish_prompt.fish).
 To verify that it works:
 
 * Open a new terminal
-* Run `aw`
-* Run `aw -l`
+* Run `sso`
+* Run `sso -l`
