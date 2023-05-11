@@ -1,6 +1,6 @@
 # Requirements
 
-Install `zsh` here: https://github.com/junegunn/fzf
+Install `fzf` here: https://github.com/junegunn/fzf
 
 # Installation steps
 
