@@ -1,6 +1,6 @@
 # Requirements
 
-Install `zsh` here: https://github.com/PatrickF1/fzf.fish
+Install `fzf` here: https://github.com/PatrickF1/fzf.fish
 
 # Installation steps
 
