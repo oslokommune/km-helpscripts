@@ -1,6 +1,6 @@
 #!/bin/sh
 while read repo; do
     cd "repos/$repo"
-    git checkout
+    git pull
     cd ../../
 done < repolist.txt
