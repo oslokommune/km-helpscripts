@@ -15,7 +15,7 @@ sso() {
       echo
       echo    "-h, --help     Show this help message"
       echo -e "-l, --login    Runs \033[32maws sso login\033[0m with the selected AWS_PROFILE"
-      exit 0
+      return
     fi
 
     # shellcheck disable=SC2155 # Ignoring this fow now, but we should have better error handling.
