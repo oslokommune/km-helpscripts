@@ -8,20 +8,38 @@ __aw_ps1() {
 
 sso() {
     if [[ "$*" == *"-h"* ]]; then
-      echo -e "Set the environment variable AWS_PROFILE based on the output of \033[32maws configure list-profiles\033[0m"
-      echo
-      echo "USAGE:"
-      echo "$ME [-l|--login] [-h|--help]"
-      echo
-      echo    "-h, --help     Show this help message"
-      echo -e "-l, --login    Runs \033[32maws sso login\033[0m with the selected AWS_PROFILE"
-      return
+        echo -e "Set the environment variable AWS_PROFILE based on the output of \033[32maws configure list-profiles\033[0m"
+        echo
+        echo "USAGE:"
+        echo "$ME [-l|--login] [-h|--help]"
+        echo
+        echo    "-h, --help     Show this help message"
+        echo -e "-l, --login    Runs \033[32maws sso login\033[0m with the selected AWS_PROFILE"
+        exit 0
     fi
 
-    # shellcheck disable=SC2155 # Ignoring this fow now, but we should have better error handling.
+    # shellcheck disable=SC2155 # Ignoring this for now, but we should have better error handling.
     export AWS_PROFILE=$(aws configure list-profiles | fzf)
 
     if [[ "$*" == *"-l"* ]]; then
-          aws sso login
+        # Start the aws sso login command and process it line by line
+        aws sso login 2>&1 | while IFS= read -r line; do
+            # Look for the line that contains the code
+            if [[ $line =~ [A-Z0-9]{4}-[A-Z0-9]{4} ]]; then
+                #code="${BASH_REMATCH[0]}"
+                code=$line
+                
+                # Check the operating system and use the appropriate command to show the notification
+                if [[ "$(uname)" == "Darwin" ]]; then
+                    # macOS
+                    osascript -e "display notification \"$code\" with title \"AWS SSO Login\""
+                elif [[ "$(uname)" == "Linux" ]]; then
+                    # Linux
+                    notify-send "AWS SSO Login" "$code"
+                fi
+            fi
+            # Optionally print the line to stdout
+            echo "$line"
+        done
     fi
 }
